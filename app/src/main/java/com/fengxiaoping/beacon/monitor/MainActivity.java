@@ -85,13 +85,9 @@ public class MainActivity extends AppCompatActivity {
             socket.on(Socket.EVENT_CONNECT, new Emitter.Listener() {
                 @Override
                 public void call(Object... args) {
-//                    socket.emit("foo", "hi");
-//                    socket.disconnect();
-
                     beaconManager.connect(new BeaconManager.ServiceReadyCallback() {
                         @Override
                         public void onServiceReady() {
-//                beaconManager.startMonitoring();
                             beaconManager.startRanging(new BeaconRegion(
                                     "monitored region",
                                     UUID.fromString("B9407F30-F5F8-466E-AFF9-25556B57FE6D"),
@@ -126,9 +122,7 @@ public class MainActivity extends AppCompatActivity {
 //                                        socket.emit("beacons_discovered", gson.toJson(b));
                                         Log.i(TAG, "beacon," + b.getMajor() + "," + RegionUtils.computeAccuracy(b));
                                     }
-
                                 }
-
                             });
 
                             beaconManager.setTelemetryListener(new BeaconManager.TelemetryListener() {
