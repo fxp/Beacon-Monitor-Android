@@ -88,14 +88,12 @@ public class MainActivity extends AppCompatActivity {
                     beaconManager.connect(new BeaconManager.ServiceReadyCallback() {
                         @Override
                         public void onServiceReady() {
-                            beaconManager.startRanging(new BeaconRegion(
+                            BeaconRegion region = new BeaconRegion(
                                     "monitored region",
                                     UUID.fromString("B9407F30-F5F8-466E-AFF9-25556B57FE6D"),
-                                    null, null));
-                            beaconManager.startMonitoring(new BeaconRegion(
-                                    "monitored region",
-                                    UUID.fromString("B9407F30-F5F8-466E-AFF9-25556B57FE6D"),
-                                    null, null));
+                                    null, null);
+                            beaconManager.startRanging(region);
+                            beaconManager.startMonitoring(region);
                             beaconManager.startTelemetryDiscovery();
                             beaconManager.startNearableDiscovery();
 
@@ -117,15 +115,15 @@ public class MainActivity extends AppCompatActivity {
 
                                 @Override
                                 public void onBeaconsDiscovered(BeaconRegion region, List<Beacon> list) {
-//                        Log.i(TAG, "beacon," + list.size());
                                     for (Beacon b : list) {
-//                                        socket.emit("beacons_discovered", gson.toJson(b));
+                                        socket.emit("beacons_discovered", gson.toJson(b));
                                         Log.i(TAG, "beacon," + b.getMajor() + "," + RegionUtils.computeAccuracy(b));
                                     }
                                 }
                             });
 
                             beaconManager.setTelemetryListener(new BeaconManager.TelemetryListener() {
+
                                 Gson gson = new Gson();
 
                                 @Override
@@ -144,7 +142,9 @@ public class MainActivity extends AppCompatActivity {
                             beaconManager.setNearableListener(new BeaconManager.NearableListener() {
                                 @Override
                                 public void onNearablesDiscovered(List<Nearable> nearables) {
+                                    Gson gson = new Gson();
                                     for (Nearable n : nearables) {
+                                        socket.emit("nearable_discovered", gson.toJson(n));
                                         Log.i(TAG, "nearable," + n);
                                     }
                                 }
