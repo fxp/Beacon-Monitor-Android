@@ -1,8 +1,9 @@
 <resources>
     <string name="app_name">Monitor</string>
     <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
+    <string name="title_dashboard">ServerURL</string>
     <string name="title_notifications">Notifications</string>
-    <string name="estimote_app_id">APP_ID</string>
-    <string name="estimote_app_key">APP_KEY</string>
+    <string name="estimote_app_id">app_0ctzc7z5yt</string>
+    <string name="estimote_app_key">45bcef1e2225b5723b8249063bef27aa</string>
+    <string name="server_url">SERVER_URL</string>
 </resources>
